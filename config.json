@@ -1,0 +1,5 @@
+{
+    "port": 8000,
+    "jwtSecret": "",
+    "mongoUri": "mongodb+srv://dominator5530:dominator5530@node-mongo-cluster.kze0g.mongodb.net/"
+}
