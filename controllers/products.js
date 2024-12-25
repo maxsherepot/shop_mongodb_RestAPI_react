@@ -1,4 +1,11 @@
+const Product = require("../models/product")
 
 exports.getProducts = (req, res, next) => {
-    res.send("send")
+    Product.find()
+        .then(products => {
+            res.send(products)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
