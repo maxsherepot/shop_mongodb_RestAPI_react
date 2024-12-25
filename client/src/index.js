@@ -14,6 +14,5 @@ root.render(
         <Router>
             <App />
         </Router>
-    </StrictMode>,
-    document.getElementById("root")
+    </StrictMode>
 )
