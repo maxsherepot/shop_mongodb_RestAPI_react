@@ -8,6 +8,13 @@ const app = express()
 
 app.use(productsRoutes)
 
+app.use((error, req, res, next) => {
+    res.status("500");
+    res.send({
+        message: "internal server error"
+    });
+});
+
 mongoose.connect(config.mongoUri)
     .then(() => app.listen(config.port))
     .catch(err => console.log(err))

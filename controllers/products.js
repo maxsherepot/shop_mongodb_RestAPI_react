@@ -6,6 +6,6 @@ exports.getProducts = (req, res, next) => {
             res.send(products)
         })
         .catch(err => {
-            console.log(err)
+            throw new Error()
         })
 }
