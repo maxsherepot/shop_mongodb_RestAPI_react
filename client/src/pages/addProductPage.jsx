@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { getProducts } from "../helpers/products";
+import React, { useState } from "react";
 
 
 const AddProductPage = () => {
-    const [loading, setLoading] = useState(false)
-    const [products, setProducts] = useState([])
-    const [error, setError] = useState(false)
-
-    // useEffect(() => {
-    //     setLoading(true)
-    //     getProducts()
-    //         .then(res => {
-    //             setProducts(res.data)
-    //         })
-    //         .catch(err => setError(true))
-    //         .finally(() => setLoading(false))
-    //  }, [])
+    const [title, setTitle] = useState("")
+    const [price, setPrice] = useState("")
+    const [imageUrl, setImageUrl] = useState("")
+    const [description, setDescription] = useState("")
 
     return (
         <div className="container">
@@ -27,26 +17,46 @@ const AddProductPage = () => {
                         <label htmlFor="title" className="form-label mb-1">
                             Title
                         </label>
-                        <input type="text" className="form-control" id="title" />
+                        <input
+                            onChange={e => setTitle(e.target.value)}
+                            value={title}
+                            type="text"
+                            className="form-control"
+                            id="title" />
                         <div className="form-text">Some input info text</div>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label mb-1">
                             Price
                         </label>
-                        <input type="number" className="form-control" id="price" />
+                        <input
+                            onChange={e => setPrice(e.target.value)}
+                            value={price}
+                            type="number"
+                            className="form-control"
+                            id="price" />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="imageUrl" className="form-label mb-1">
                             Image url
                         </label>
-                        <input type="text" className="form-control" id="imageUrl" />
+                        <input
+                            onChange={e => setImageUrl(e.target.value)}
+                            value={imageUrl}
+                            type="text"
+                            className="form-control"
+                            id="imageUrl" />
                     </div>
                     <div className="mb-4">
                         <label htmlFor="description" className="form-label mb-1">
                             Description
                         </label>
-                        <textarea type="text" className="form-control" id="description" />
+                        <textarea
+                            onChange={e => setDescription(e.target.value)}
+                            value={description}
+                            type="text"
+                            className="form-control"
+                            id="description" />
                     </div>
 
                     <button type="submit" className="btn btn-primary shadow">Create</button>
