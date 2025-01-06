@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { addProduct } from "../helpers/products";
+//import { useHistory } from "react-router-dom";
 
 
 const AddProductPage = () => {
@@ -7,12 +9,27 @@ const AddProductPage = () => {
     const [imageUrl, setImageUrl] = useState("")
     const [description, setDescription] = useState("")
 
+    //const history = useHistory();
+
+    const createProduct = (e) => {
+        e.preventDefault()
+        props.history.push("/");
+        // addProduct({ title, price, description, imageUrl })
+        //     .then(() => {
+        //         history.push("/");
+        //     })
+        //     .catch(err => {
+        //         console.log(err)
+        //         //TODO add notification
+        //     })
+    }
+
     return (
         <div className="container">
             <h2>Add new product</h2>
 
             <div className="new-product-container mt-5">
-                <form>
+                <form onSubmit={e => createProduct(e)}>
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label mb-1">
                             Title

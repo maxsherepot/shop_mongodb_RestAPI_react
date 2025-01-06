@@ -7,3 +7,9 @@ export async function getProducts() {
         .get("/products")
         .catch(errorsHandler)
 }
+
+export async function addProduct(value) {
+    return axiosInstance
+        .post("/add-product", value)
+        .catch(errorsHandler)
+}
