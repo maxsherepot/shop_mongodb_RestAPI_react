@@ -1,5 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const bodyParser = require("body-parser")
 
 const config = require("./config.json")
 const productsRoutes = require("./routes/products")
@@ -13,7 +14,8 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
     next()
 });
-
+//app.use(bodyParser.urlencoded({ extended: false }))  used for forms;
+app.use(bodyParser.json());
 app.use(productsRoutes)
 
 // 500 Error handling
