@@ -11,6 +11,7 @@ exports.getProducts = (req, res, next) => {
         })
 }
 
+//TODO Add validation
 exports.addProduct = (req, res, next) => {
     const { title, price, description, imageUrl } = req.body;
     const newProduct = new Product({ title, price, description, imageUrl })
@@ -22,5 +23,19 @@ exports.addProduct = (req, res, next) => {
         })
         .catch(() => {
             throw new Error()
+        })
+}
+
+exports.getProduct = (req, res, next) => {
+    const productId = req.params.id
+
+    Product.findById(productId)
+        .then(product => {
+            if (!product) {
+                //TODO Add error handling
+                throw new Error()
+            }
+            res.status(200)
+            res.json(product)
         })
 }

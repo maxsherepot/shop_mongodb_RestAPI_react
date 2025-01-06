@@ -7,4 +7,6 @@ router.get("/products", productsController.getProducts)
 
 router.post("/add-product", productsController.addProduct)
 
+router.get("/product/:id", productsController.getProduct)
+
 module.exports = router
