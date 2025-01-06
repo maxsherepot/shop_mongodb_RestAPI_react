@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ProductCard from "../components/ProductCard";
 import { getProducts } from "../helpers/products";
 
 
@@ -11,14 +12,15 @@ const ProductsPage = () => {
         setLoading(true)
         getProducts()
             .then(res => {
-                setProducts(res.data)
+                setProducts(res.data.products)
             })
             .catch(err => setError(true))
             .finally(() => setLoading(false))
     }, [])
 
+
     return (
-        <div className="container">
+        <div className="container mb-5">
             <h1>ProductsPage</h1>
             {
                 loading ?
@@ -28,7 +30,11 @@ const ProductsPage = () => {
                         <h1>Error</h1>
                         :
                         products && products.length ?
-                            <h1>products && products.length</h1>
+                            <div className="products-container pb-5">
+                                {products.map(product => (
+                                    <ProductCard product={product} key={product._id} />
+                                ))}
+                            </div>
                             :
                             <h1>no products yet</h1>
             }
