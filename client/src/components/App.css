@@ -18,12 +18,6 @@
     cursor: pointer;
 }
 
-.product-card a {
-    text-decoration: none;
-    color: #212529;
-    height: 100%;
-}
-
 .new-product-container {
     max-width: 600px;
 }

@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import { getProducts } from "../helpers/products";
+import { useHistory } from "react-router-dom";
 
 
 const ProductsPage = () => {
     const [loading, setLoading] = useState(false)
     const [products, setProducts] = useState([])
     const [error, setError] = useState(false)
+
+    const history = useHistory();
+
+    const onCardClick = (id) => {
+        history.push(`/product/${id}`);
+    }
 
     useEffect(() => {
         setLoading(true)
@@ -32,7 +39,10 @@ const ProductsPage = () => {
                         products && products.length ?
                             <div className="products-container pb-5">
                                 {products.map(product => (
-                                    <ProductCard product={product} key={product._id} />
+                                    <ProductCard
+                                        product={product}
+                                        onCardClick={onCardClick}
+                                        key={product._id} />
                                 ))}
                             </div>
                             :
