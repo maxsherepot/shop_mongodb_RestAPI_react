@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { addProduct } from "../helpers/products";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { showErrorToast, showSuccessToast } from "../helpers/helpers";
+import { errorToastNotification } from "../constants";
 
 
 const AddProductPage = () => {
@@ -9,19 +11,20 @@ const AddProductPage = () => {
     const [imageUrl, setImageUrl] = useState("")
     const [description, setDescription] = useState("")
 
-    //const history = useHistory();
+    const history = useHistory();
 
     const createProduct = (e) => {
         e.preventDefault()
-        props.history.push("/");
-        // addProduct({ title, price, description, imageUrl })
-        //     .then(() => {
-        //         history.push("/");
-        //     })
-        //     .catch(err => {
-        //         console.log(err)
-        //         //TODO add notification
-        //     })
+
+        addProduct({ title, price, description, imageUrl })
+            .then(() => {
+                history.push("/");
+                showSuccessToast("Product created successfully")
+            })
+            .catch(err => {
+                showErrorToast(errorToastNotification)
+                console.log(err)
+            })
     }
 
     return (
