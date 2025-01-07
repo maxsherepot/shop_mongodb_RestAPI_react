@@ -8,6 +8,12 @@ export async function getProducts() {
         .catch(errorsHandler)
 }
 
+export async function getProduct(id) {
+    return axiosInstance
+        .get(`/product/${id}`)
+        .catch(errorsHandler)
+}
+
 export async function addProduct(value) {
     return axiosInstance
         .post("/add-product", value)
