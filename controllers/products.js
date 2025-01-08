@@ -39,3 +39,31 @@ exports.getProduct = (req, res, next) => {
             res.json(product)
         })
 }
+
+exports.updateProduct = (req, res, next) => {
+    const { title, price, description, imageUrl } = req.body;
+    const productId = req.params.id
+
+    Product.findById(productId)
+        .then(product => {
+            if (!product) {
+                throw new Error()
+            }
+            product.title = title;
+            product.imageUrl = imageUrl;
+            product.price = price;
+            product.description = description;
+
+            product.save()
+                .then(() => {
+                    res.status(200)
+                    res.json(product)
+                })
+                .catch(() => {
+                    throw new Error()
+                })
+        })
+        .catch(() => {
+            throw new Error()
+        })
+}

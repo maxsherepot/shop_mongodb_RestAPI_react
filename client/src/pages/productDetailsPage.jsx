@@ -40,8 +40,9 @@ const ProductDetailsPage = ({ match }) => {
     const onDeleteProduct = () => {
     }
 
-    const onFormSubmit = () => {
-        console.log("Saved")
+    const onFormSubmit = e => {
+        e.preventDefault()
+        
     }
 
     return (
