@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ProductCard from "../components/ProductCard";
 import { getProduct } from "../helpers/products";
 
 
@@ -20,7 +21,27 @@ const ProductDetailsPage = ({ match }) => {
     }, [])
 
     return (
-        <h1>ProductDetailsPage</h1>
+        <div className="container my-5">
+            {
+                loading ?
+                    // TODO add Spinner
+                    <h1>Loading</h1>
+                    :
+                    error ?
+                        // TODO add Error message component
+                        <h1>Error</h1>
+                        :
+                        product ?
+                            <div className="product-card-container pt-3">
+                                <ProductCard
+                                    product={product}
+                                    fullSize
+                                />
+                            </div>
+                            :
+                            <h1>no products yet</h1>
+            }
+        </div>
     )
 }
 
