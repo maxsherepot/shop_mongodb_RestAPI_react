@@ -4,7 +4,9 @@ import InfoBanner from "../components/InfoBanner";
 import ProductCard from "../components/ProductCard";
 import ProductForm from "../components/ProductForm";
 import Spinner from "../components/Spinner";
-import { getProduct } from "../helpers/products";
+import { errorToastNotification } from "../constants";
+import { showErrorToast, showSuccessToast } from "../helpers/helpers";
+import { editProduct, getProduct } from "../helpers/products";
 
 
 const ProductDetailsPage = ({ match }) => {
@@ -31,7 +33,7 @@ const ProductDetailsPage = ({ match }) => {
             })
             .catch(err => setError(true))
             .finally(() => setLoading(false))
-    }, [])
+    }, [isEditMode])
 
     const onEditProduct = () => {
         setIsEditMode(true)
@@ -42,7 +44,13 @@ const ProductDetailsPage = ({ match }) => {
 
     const onFormSubmit = e => {
         e.preventDefault()
-        
+
+        editProduct(productId, { title, price, description, imageUrl })
+            .then(res => {
+                setIsEditMode(false)
+                showSuccessToast("Updated")
+            })
+            .catch(() => showErrorToast(errorToastNotification))
     }
 
     return (

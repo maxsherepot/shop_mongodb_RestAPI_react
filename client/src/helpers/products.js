@@ -19,3 +19,9 @@ export async function addProduct(value) {
         .post("/add-product", value)
         .catch(errorsHandler)
 }
+
+export async function editProduct(id, value) {
+    return axiosInstance
+        .put(`/product/${id}`, value)
+        .catch(errorsHandler)
+}
