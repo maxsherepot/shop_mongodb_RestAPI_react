@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ErrorBanner from "../components/ErrorBanner";
 import ProductCard from "../components/ProductCard";
 import Spinner from "../components/Spinner";
 import { getProduct } from "../helpers/products";
@@ -28,8 +29,7 @@ const ProductDetailsPage = ({ match }) => {
                     <Spinner />
                     :
                     error ?
-                        // TODO add Error message component
-                        <h1>Error</h1>
+                        <ErrorBanner />
                         :
                         product ?
                             <div className="product-card-container pt-3">

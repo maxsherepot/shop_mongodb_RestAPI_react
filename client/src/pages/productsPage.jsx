@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard";
 import { getProducts } from "../helpers/products";
 import { useHistory } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import ErrorBanner from "../components/ErrorBanner";
 
 
 const ProductsPage = () => {
@@ -35,7 +36,7 @@ const ProductsPage = () => {
                     <Spinner />
                     :
                     error ?
-                        <h1>Error</h1>
+                        <ErrorBanner />
                         :
                         products && products.length ?
                             <div className="products-container pb-5">
