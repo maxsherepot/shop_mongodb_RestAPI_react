@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
+import Spinner from "../components/Spinner";
 import { getProduct } from "../helpers/products";
 
 
@@ -24,8 +25,7 @@ const ProductDetailsPage = ({ match }) => {
         <div className="container my-5">
             {
                 loading ?
-                    // TODO add Spinner
-                    <h1>Loading</h1>
+                    <Spinner />
                     :
                     error ?
                         // TODO add Error message component

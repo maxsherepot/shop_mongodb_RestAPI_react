@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import { getProducts } from "../helpers/products";
 import { useHistory } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 
 const ProductsPage = () => {
@@ -31,7 +32,7 @@ const ProductsPage = () => {
             <h1>ProductsPage</h1>
             {
                 loading ?
-                    <h1>Loading</h1>
+                    <Spinner />
                     :
                     error ?
                         <h1>Error</h1>
