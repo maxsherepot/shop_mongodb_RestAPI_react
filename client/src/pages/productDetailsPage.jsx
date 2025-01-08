@@ -22,6 +22,12 @@ const ProductDetailsPage = ({ match }) => {
             .finally(() => setLoading(false))
     }, [])
 
+    const onEditProduct = () => {
+    }
+
+    const onDeleteProduct = () => {
+    }
+
     return (
         <div className="container my-5">
             {
@@ -36,9 +42,12 @@ const ProductDetailsPage = ({ match }) => {
                                 <ProductCard
                                     product={product}
                                     fullSize
+                                    onEditProduct={onEditProduct}
+                                    onDeleteProduct={onDeleteProduct}
                                 />
                             </div>
                             :
+                            // TODO Add no product(s) banner
                             <h1>no products yet</h1>
             }
         </div>
