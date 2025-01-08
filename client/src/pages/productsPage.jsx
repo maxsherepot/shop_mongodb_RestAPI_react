@@ -4,6 +4,7 @@ import { getProducts } from "../helpers/products";
 import { useHistory } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import ErrorBanner from "../components/ErrorBanner";
+import InfoBanner from "../components/InfoBanner";
 
 
 const ProductsPage = () => {
@@ -48,7 +49,7 @@ const ProductsPage = () => {
                                 ))}
                             </div>
                             :
-                            <h1>no products yet</h1>
+                            <InfoBanner message="No products yet" />
             }
         </div>
     )

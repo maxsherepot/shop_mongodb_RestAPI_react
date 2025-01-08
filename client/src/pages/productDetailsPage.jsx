@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ErrorBanner from "../components/ErrorBanner";
+import InfoBanner from "../components/InfoBanner";
 import ProductCard from "../components/ProductCard";
 import Spinner from "../components/Spinner";
 import { getProduct } from "../helpers/products";
@@ -47,8 +48,7 @@ const ProductDetailsPage = ({ match }) => {
                                 />
                             </div>
                             :
-                            // TODO Add no product(s) banner
-                            <h1>no products yet</h1>
+                            <InfoBanner message="no product available" />
             }
         </div>
     )
