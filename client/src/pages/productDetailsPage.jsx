@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ErrorBanner from "../components/ErrorBanner";
 import InfoBanner from "../components/InfoBanner";
+import ConfirmationModal from "../components/ConfirmationModal";
 import ProductCard from "../components/ProductCard";
 import ProductForm from "../components/ProductForm";
 import Spinner from "../components/Spinner";
@@ -19,6 +20,7 @@ const ProductDetailsPage = ({ match }) => {
     const [price, setPrice] = useState("")
     const [imageUrl, setImageUrl] = useState("")
     const [description, setDescription] = useState("")
+
     const productId = match.params.id
 
     useEffect(() => {
@@ -40,6 +42,7 @@ const ProductDetailsPage = ({ match }) => {
     }
 
     const onDeleteProduct = () => {
+        console.log("onDeleteProduct")
     }
 
     const onFormSubmit = e => {
@@ -55,40 +58,39 @@ const ProductDetailsPage = ({ match }) => {
 
     return (
         <div className="container my-5">
-            {
-                loading ?
-                    <Spinner />
+            <ConfirmationModal onSubmit={onDeleteProduct} />
+            {loading ?
+                <Spinner />
+                :
+                error ?
+                    <ErrorBanner />
                     :
-                    error ?
-                        <ErrorBanner />
+                    isEditMode ?
+                        <div className="new-product-container mt-5">
+                            <ProductForm
+                                onFormSubmit={onFormSubmit}
+                                setTitle={setTitle}
+                                title={title}
+                                setPrice={setPrice}
+                                price={price}
+                                setImageUrl={setImageUrl}
+                                imageUrl={imageUrl}
+                                setDescription={setDescription}
+                                description={description}
+                                submitBtnTitle="Save"
+                            />
+                        </div>
                         :
-                        isEditMode ?
-                            <div className="new-product-container mt-5">
-                                <ProductForm
-                                    onFormSubmit={onFormSubmit}
-                                    setTitle={setTitle}
-                                    title={title}
-                                    setPrice={setPrice}
-                                    price={price}
-                                    setImageUrl={setImageUrl}
-                                    imageUrl={imageUrl}
-                                    setDescription={setDescription}
-                                    description={description}
-                                    submitBtnTitle="Save"
+                        product ?
+                            <div className="product-card-container pt-3">
+                                <ProductCard
+                                    onEditProduct={onEditProduct}
+                                    product={product}
+                                    fullSize
                                 />
                             </div>
                             :
-                            product ?
-                                <div className="product-card-container pt-3">
-                                    <ProductCard
-                                        product={product}
-                                        fullSize
-                                        onEditProduct={onEditProduct}
-                                        onDeleteProduct={onDeleteProduct}
-                                    />
-                                </div>
-                                :
-                                <InfoBanner message="no product available" />
+                            <InfoBanner message="no product available" />
             }
         </div>
     )

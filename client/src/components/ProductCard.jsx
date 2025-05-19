@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const ProductCard = ({ product, onCardClick, fullSize = false, onEditProduct, onDeleteProduct }) => {
+const ProductCard = ({ product, onCardClick, fullSize = false, onEditProduct }) => {
     const { title, price, description, imageUrl, _id } = product;
     const onClickFn = fullSize ? () => { } : () => onCardClick(_id)
 
@@ -18,11 +18,11 @@ const ProductCard = ({ product, onCardClick, fullSize = false, onEditProduct, on
                 fullSize &&
                 <div className="d-flex my-5 mx-2 justify-content-center">
                     <button
-                        onClick={() => onEditProduct()}
+                        onClick={onEditProduct}
                         className="mx-3 btn btn-outline-dark w-100 shadow"
                     >Edit</button>
                     <button
-                        onClick={() => onDeleteProduct()}
+                        data-bs-toggle="modal" data-bs-target="#deleteModal"
                         className="mx-3 btn btn-outline-danger w-100 shadow"
                     >Delete</button>
                 </div>
