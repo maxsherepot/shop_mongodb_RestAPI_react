@@ -67,3 +67,27 @@ exports.updateProduct = (req, res, next) => {
             throw new Error()
         })
 }
+
+exports.deleteProduct = (req, res, next) => {
+    const productId = req.params.id
+
+    Product.findById(productId)
+        .then(product => {
+            if (!product) {
+                const error = new Error("Product not found");
+                error.statusCode = 404
+                throw error
+            }
+            return Product.deleteOne({ _id: productId })
+        })
+        .then(() => {
+            res.status(200)
+            res.json("Product deleted")
+        })
+        .catch(err => {
+            if (!err.statusCode) {
+                err.statusCode = 500
+            }
+            next(err)
+        })
+}

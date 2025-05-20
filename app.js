@@ -20,7 +20,7 @@ app.use(productsRoutes)
 
 // 500 Error handling
 app.use((error, req, res, next) => {
-    res.status("500");
+    res.status(500);
     res.send({
         message: "internal server error"
     });

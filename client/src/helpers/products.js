@@ -25,3 +25,9 @@ export async function editProduct(id, value) {
         .put(`/product/${id}`, value)
         .catch(errorsHandler)
 }
+
+export async function deleteProduct(id) {
+    return axiosInstance
+        .delete(`/product/${id}`)
+        .catch(errorsHandler)
+}

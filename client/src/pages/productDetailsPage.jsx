@@ -7,7 +7,8 @@ import ProductForm from "../components/ProductForm";
 import Spinner from "../components/Spinner";
 import { errorToastNotification } from "../constants";
 import { showErrorToast, showSuccessToast } from "../helpers/helpers";
-import { editProduct, getProduct } from "../helpers/products";
+import { deleteProduct, editProduct, getProduct } from "../helpers/products";
+import { useHistory } from "react-router-dom";
 
 
 const ProductDetailsPage = ({ match }) => {
@@ -15,12 +16,13 @@ const ProductDetailsPage = ({ match }) => {
     const [product, setProduct] = useState(null)
     const [error, setError] = useState(false)
     const [isEditMode, setIsEditMode] = useState(false)
-
     const [title, setTitle] = useState("")
     const [price, setPrice] = useState("")
     const [imageUrl, setImageUrl] = useState("")
     const [description, setDescription] = useState("")
+    const [showModal, setShowModal] = useState(false)
 
+    const history = useHistory();
     const productId = match.params.id
 
     useEffect(() => {
@@ -42,7 +44,14 @@ const ProductDetailsPage = ({ match }) => {
     }
 
     const onDeleteProduct = () => {
-        console.log("onDeleteProduct")
+        setLoading(true)
+        deleteProduct(productId)
+            .then(() => {
+                history.push("/");
+                showSuccessToast("Product deleted successfully")
+            })
+            .catch(() => showErrorToast(errorToastNotification))
+            .finally(() => setLoading(false))
     }
 
     const onFormSubmit = e => {
@@ -58,7 +67,12 @@ const ProductDetailsPage = ({ match }) => {
 
     return (
         <div className="container my-5">
-            <ConfirmationModal onSubmit={onDeleteProduct} />
+            {showModal &&
+                <ConfirmationModal
+                    onSubmit={onDeleteProduct}
+                    setShowModal={setShowModal}
+                />
+            }
             {loading ?
                 <Spinner />
                 :
@@ -86,6 +100,7 @@ const ProductDetailsPage = ({ match }) => {
                                 <ProductCard
                                     onEditProduct={onEditProduct}
                                     product={product}
+                                    setShowModal={setShowModal}
                                     fullSize
                                 />
                             </div>
