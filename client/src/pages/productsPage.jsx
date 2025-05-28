@@ -31,7 +31,7 @@ const ProductsPage = () => {
 
     return (
         <div className="container mb-5">
-            <h1>ProductsPage</h1>
+            <h2 className="mb-4">Products list</h2>
             {
                 loading ?
                     <Spinner />
